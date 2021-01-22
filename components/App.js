@@ -44,12 +44,25 @@ export default function App() {
     <div dir="rtl" className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          حذف تکراری‌های <a href="https://nextjs.org">دو فایل اکسل!</a>
+          حذف تکراری‌های{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/alisouran/RDRE"
+          >
+            دو فایل اکسل!
+          </a>
         </h1>
 
         <p className={styles.description}>
           در صورت هرگونه مشکل پیام دهید:{" "}
-          <a href="https://t.me/alisouran">تلگرام</a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://t.me/alisouran"
+          >
+            تلگرام
+          </a>
         </p>
 
         <div className={styles.grid}>
@@ -87,6 +100,12 @@ export default function App() {
             <p>نام ستون منحصر به فرد:</p>
             <input
               type="text"
+              style={{
+                direction: "ltr",
+                width: "100%",
+                padding: "5px",
+                textAlign: "center",
+              }}
               onChange={(e) => {
                 setColumn(foo(e.target.value.toUpperCase()));
               }}
