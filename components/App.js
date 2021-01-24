@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import readXlsxFile from "read-excel-file";
 import { useJsonToCsv } from "react-json-csv";
 import styles from "../styles/Home.module.css";
+import XlsExport from "xlsexport";
 
 export default function App() {
   const [currentExcelFile, setCurrentExcelFile] = useState([]);
@@ -17,17 +18,13 @@ export default function App() {
   useEffect(() => {
     setLoading(false);
     if (currentExcelFile.length > 0) {
-      console.log(currentExcelFile);
       let sss = {};
       currentExcelFile[0].map((i, j) => {
         sss[j] = j;
       });
       setFields(sss);
     }
-    if (newExcelFile.length > 0) {
-      console.log(newExcelFile);
-    }
-    console.log(data);
+    console.log("🚀 ~ file: App.js ~ line 143 ~ newExcelFile.map ~ data", data);
   }, [currentExcelFile, newExcelFile, data]);
 
   var foo = function (val) {
@@ -70,6 +67,7 @@ export default function App() {
             <p>فایل اولیه را بارگزاری نمایید:</p>
             <input
               type="file"
+              accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
               disabled={loading ? "disabled" : ""}
               multiple
               onChange={(event) => {
@@ -80,11 +78,11 @@ export default function App() {
               }}
             />
           </div>
-
           <div className={styles.card}>
             <p>فایل ثانویه را بارگزاری نمایید:</p>
             <input
               type="file"
+              accept=".xls , .xlsx , application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
               multiple
               disabled={loading ? "disabled" : ""}
               onChange={(event) => {
@@ -144,12 +142,26 @@ export default function App() {
               <>
                 <p>فایل را از اینجا دانلود کنید:</p>
                 <button
+                  style={{ marginLeft: 7 }}
                   onClick={() => {
-                    console.log(data);
-                    saveAsCsv({ data, fields, filename });
+                    const xls = new XlsExport(data, "Example WB");
+                    xls.exportToXLS(
+                      `xls-file-${date.getFullYear()}${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}.xls`
+                    );
                   }}
                 >
-                  فایل آماده‌ی دانلود می‌باشد...
+                  دانلود فرمت xls
+                </button>
+                <button
+                  style={{ marginRight: 7 }}
+                  onClick={() => {
+                    const xls = new XlsExport(data, "Example WB");
+                    xls.exportToCSV(
+                      `csv-file-${date.getFullYear()}${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}.csv`
+                    );
+                  }}
+                >
+                  دانلود فرمت csv
                 </button>
               </>
             </div>
