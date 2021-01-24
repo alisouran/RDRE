@@ -146,11 +146,22 @@ export default function App() {
                   onClick={() => {
                     const xls = new XlsExport(data, "Example WB");
                     xls.exportToXLS(
+                      `xlsx-file-${date.getFullYear()}${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}.xlsx`
+                    );
+                  }}
+                >
+                  XLSX
+                </button>
+                <button
+                  style={{ marginLeft: 7, marginRight: 7 }}
+                  onClick={() => {
+                    const xls = new XlsExport(data, "Example WB");
+                    xls.exportToXLS(
                       `xls-file-${date.getFullYear()}${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}.xls`
                     );
                   }}
                 >
-                  دانلود فرمت xls
+                  XLS
                 </button>
                 <button
                   style={{ marginRight: 7 }}
@@ -161,7 +172,7 @@ export default function App() {
                     );
                   }}
                 >
-                  دانلود فرمت csv
+                  CSV
                 </button>
               </>
             </div>
